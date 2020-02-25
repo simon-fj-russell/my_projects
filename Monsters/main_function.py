@@ -92,28 +92,27 @@ def starting_conditions():
 # Moves the monsters using step function
 # Checks if any monsters are in the same city, removes the monsters and gets a list of cities to drop
 # Removes the city from the map
-def main():
-    monster_locations, world_map = starting_conditions()
-    moves = 1
-    cities_destroyed = []
-    while moves < 10001 and len(monster_locations) > 1:
-        monster_locations = step(monster_locations, world_map)
-        monster_locations, cities_to_drop = monster_fight(monster_locations, moves)
-        cities_destroyed.append(cities_to_drop)
-        world_map = remove_cities(cities_to_drop, world_map)
-        moves += 1
-        if moves == 10001:
-            print("")
-            print("Reason for end:")
-            print("Ran out of moves")
-        elif len(monster_locations) == 1:
-            print("")
-            print("Reason for end:")
-            print("There is only 1 monster left.")
-        elif len(monster_locations) == 0:
-            print("")
-            print("Reason for end:")
-            print("All the monsters are dead")
+monster_locations, world_map = starting_conditions()
+moves = 1
+cities_destroyed = []
+while moves < 10001 and len(monster_locations) > 1:
+    monster_locations = step(monster_locations, world_map)
+    monster_locations, cities_to_drop = monster_fight(monster_locations, moves)
+    cities_destroyed.append(cities_to_drop)
+    world_map = remove_cities(cities_to_drop, world_map)
+    moves += 1
+    if moves == 10001:
+        print("")
+        print("Reason for end:")
+        print("Ran out of moves")
+    elif len(monster_locations) == 1:
+        print("")
+        print("Reason for end:")
+        print("There is only 1 monster left.")
+    elif len(monster_locations) == 0:
+        print("")
+        print("Reason for end:")
+        print("All the monsters are dead")
 
-    print("")
-    print("There are {} cities left and {} monsters.".format(len(world_map), len(monster_locations)))
+print("")
+print("There are {} cities left and {} monsters.".format(len(world_map), len(monster_locations)))
